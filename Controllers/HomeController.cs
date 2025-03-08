@@ -17,7 +17,7 @@ namespace Sistemas_de_inventario.Controllers
 
             return View();
         }
-        public IActionResult Index()
+        public IActionResult Supervisor()
         {
             return View();
         }
