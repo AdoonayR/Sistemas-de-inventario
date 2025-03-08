@@ -12,7 +12,11 @@ namespace Sistemas_de_inventario.Controllers
         {
             _logger = logger;
         }
+        public IActionResult Login()
+        {
 
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

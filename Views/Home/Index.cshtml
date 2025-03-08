@@ -1,9 +1,44 @@
 ﻿<!DOCTYPE html>
-    <html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-    
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventarios</title>
+    <link rel="stylesheet" href="/css/Index.css">
+</head>
+<body>
+
+    <header>
+        <h1>Gestión de Inventarios</h1>
+    </header>
+
+    <div class="container">
+        <!-- Sección de búsqueda -->
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar producto...">
+            <button onclick="searchItem()">Buscar</button>
+        </div>
+
+        <!-- Tabla de inventario -->
+        <div class="table-container">
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí irán los productos del inventario -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón para añadir productos -->
+        <button class="add-item-button" onclick="addItem()">Añadir Producto</button>
+    </div>
     </body>
-    </html>
+<script src="/js/Index.js"></script>
+</html>
