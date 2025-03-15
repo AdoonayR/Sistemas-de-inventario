@@ -3,20 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Inventario - Administrador</title>
-    <link rel="stylesheet" href="/css/Supervisor.css">
-
+    <title>Gestión de Inventario - Almacén</title>
+    <link rel="stylesheet" href="~/css/Warehouse.css">
 </head>
 <body>
     <div class="container">
-        <h1>Gestión de Inventario - Administrador</h1>
-
-        <div class="navigation">
-            <!-- Redirigir a la vista de Producción -->
-            <a href="/Home/Production" class="button">Ir a Producción</a>
-            <!-- Redirigir a la vista de Almacén -->
-            <a href="/Home/Warehouse" class="button">Ir a Almacén</a>
-        </div>
+        <h1>Gestión de Inventario - Almacén</h1>
 
         <div class="search-bar">
             <input type="text" id="searchPart" placeholder="Buscar número de parte...">
@@ -24,7 +16,7 @@
         </div>
 
         <div class="part-details">
-            <label for="part-number">Numero de Parte:</label>
+            <label for="part-number">Número de Parte:</label>
             <input type="text" id="part-number" disabled>
 
             <label for="part-name">Nombre del Producto:</label>
@@ -32,6 +24,14 @@
 
             <label for="quantity">Cantidad a Registrar:</label>
             <input type="number" id="quantity" min="1">
+
+            <label for="location">Locación del Material:</label>
+            <select id="location">
+                <option value="A1">A1 - Estante 1</option>
+                <option value="B1">B1 - Estante 2</option>
+                <option value="C1">C1 - Estante 3</option>
+                <option value="D1">D1 - Estante 4</option>
+            </select>
 
             <label for="date">Fecha de Registro:</label>
             <input type="date" id="date">
@@ -41,8 +41,7 @@
         </div>
     </div>
 
-    <script src="/js/Supervisor.js"></script>
-
+    <script src="~/js/Warehouse.js"></script>
 </body>
 </html>
 

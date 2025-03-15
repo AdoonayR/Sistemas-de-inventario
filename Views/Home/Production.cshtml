@@ -3,46 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vista de Producción</title>
-    <link rel="stylesheet" href="~/css/production.css"> <!-- Enlazamos el CSS externo -->
+    <title>Gestion de Inventario - Produccion</title>
+    <link rel="stylesheet" href=/css/Production.css>
 </head>
-
 <body>
     <div class="container">
-        <h1>Producción</h1>
+        <h1>Gestion de Inventario - Produccion</h1>
 
-        <!-- Formulario para registrar un número de parte -->
-        <div class="form-container">
-            <h2>Registrar un Número de Parte</h2>
-
-            <form id="formproducto">
-                <label for="PN">Número de parte: </label>
-                <input type="text" id="PN" name="PN" required />
-
-                <label for="quantity">Cantidad: </label>
-                <input type="number" id="quantity" name="quantity" required />
-
-                <button type="submit">Agregar</button>
-            </form>
+        <div class="search-bar">
+            <input type="text" id="searchPart" placeholder="Buscar numero de parte...">
+            <button onclick="searchPart()">Buscar</button>
         </div>
 
-        <!-- Sección para mostrar los productos agregados -->
-        <div class="product-list">
-            <h2>Productos Registrados</h2>
-            <table id="productTable">
-                <thead>
-                    <tr>
-                        <th>Número de Parte</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Los productos agregados se mostrarán aquí -->
-                </tbody>
-            </table>
+        <div class="part-details">
+            <label for="part-number">Numero de Parte:</label>
+            <input type="text" id="part-number" disabled>
+
+            <label for="part-name">Nombre del Producto:</label>
+            <input type="text" id="part-name" disabled>
+
+            <label for="quantity">Cantidad Disponible:</label>
+            <input type="number" id="quantity" disabled>
+
+            <label for="location">Locacion del Material:</label>
+            <input type="text" id="location" disabled>
+
+            <button onclick="requestMaterial()">Solicitar Material</button>
         </div>
     </div>
 
-    <script src="/js/Production.js"></script> <!-- Enlazamos el archivo JavaScript -->
+    <script src="/js/Production.js"></script>
 </body>
 </html>
