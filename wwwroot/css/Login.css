@@ -1,5 +1,6 @@
-﻿html, body {
-    background: #fff;
+﻿/* Fondo general en gris muy oscuro */
+html, body {
+    background: #111; /* Negro grisáceo */
     height: 100%;
     margin: 0;
     padding: 0;
@@ -10,20 +11,24 @@
     overflow: hidden;
 }
 
+/* Contenedor de login centrado */
 .login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     text-align: center;
-    z-index: 1000;
-    position: relative;
     max-width: 400px;
     width: 90%;
     box-sizing: border-box;
 }
 
-
+/* Inputs y contenedores */
 .input-container {
     position: relative;
 }
@@ -38,6 +43,7 @@
     box-sizing: border-box;
 }
 
+/* Mensajes de error */
 .input-toast {
     position: absolute;
     top: 0;
@@ -66,13 +72,14 @@
     }
 }
 
-
+/* Logo */
 .login-logo {
-    width: 100%;
-    max-width: 250px;
-    margin-bottom: 20px;
+    width: 50%;
+    max-width: 150px;
+    margin-bottom:10px;
 }
 
+/* Ajuste de campos en .login-container */
 .login-container .form-group {
     margin-bottom: 15px;
     text-align: left;
@@ -88,10 +95,11 @@
         margin: 0 auto;
     }
 
+/* Botón de ingresar en gris */
 .login-container button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #555; /* Gris medio */
     border: none;
     border-radius: 5px;
     color: white;
@@ -101,13 +109,25 @@
 }
 
     .login-container button:hover {
-        background-color: #0056b3;
+        background-color: #777; /* Un gris más claro al hover */
     }
 
+/* Animación de "respiración" */
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        background-color: #555;
+    }
 
+    50% {
+        transform: scale(1.05);
+        background-color: #666;
+    }
+}
 
+/* Fondo animado */
 .animated-marquee {
-    background: #1697e0;
+    background: #111; /* Igual que el body, para continuidad */
     margin: 0 auto;
     min-height: 340px;
     overflow: hidden;
@@ -119,6 +139,7 @@
     z-index: 1;
 }
 
+/* Animación de deslizamiento */
 @-webkit-keyframes slide {
     0% {
         -webkit-transform: rotate(-22deg) skewX(-22.5deg) translate3d(-100%,0,0);
@@ -143,18 +164,7 @@
     }
 }
 
-@keyframes breathe {
-    0%, 100% {
-        transform: scale(1);
-        background-color: #007bff;
-    }
-
-    50% {
-        transform: scale(1.05);
-        background-color: #0056b3;
-    }
-}
-
+/* Contenedor principal de la animación */
 .animated-marquee-container {
     position: absolute;
     top: -75%;
@@ -162,6 +172,7 @@
     -webkit-animation: slide 18s linear infinite;
 }
 
+/* Múltiples capas */
 .animated-marquee-foreground {
     margin-top: 3em;
     -webkit-animation-duration: 42s;
@@ -181,29 +192,35 @@
     z-index: 0;
 }
 
+/* Tarjetas (Blancas) */
 .animated-marquee-card {
-    background: #fff;
+    background: #fff; /* Se mantienen blancas */
     float: left;
     margin-top: -2%;
-    margin-right: 2%;
+    margin-right: 1%; /* Ajusté a 1% para que quepan más en pantalla grande */
     -webkit-transition: opacity 2s ease-out;
     height: 100px;
     position: relative;
     width: 8%;
 }
 
+/* Foreground */
 .animated-marquee-foreground .animated-marquee-card {
-    height: 200px;
-    margin-right: 9%;
+    height: 180px; /* un poco más pequeño que 200px */
+    margin-right: 3%;
     opacity: .6;
-    width: 320px;
+    width: 280px;
 }
 
+/* Middleground */
 .animated-marquee-middleground .animated-marquee-card {
     margin-right: 2%;
     opacity: .3;
+    height: 120px;
+    width: 170px;
 }
 
+/* Background */
 .animated-marquee-background .animated-marquee-card {
     height: 50px;
     margin-right: 1%;
@@ -212,31 +229,12 @@
     width: 4%;
 }
 
+/* Al pasar el mouse */
 .animated-marquee-card:hover {
     opacity: .8 !important;
 }
 
-.animated-marquee-card:nth-child(3n+3) {
-    left: 30%;
-    top: 20%;
-}
-
-.animated-marquee-card:nth-child(8n+1) {
-    right: 20%;
-}
-
-.animated-marquee-card:nth-child(4n+3) {
-    top: 18%;
-}
-
-.animated-marquee-card:nth-child(3n+5) {
-    bottom: 10%;
-}
-
-.animated-marquee-card:nth-child(3n+1) {
-    visibility: hidden;
-}
-
+/* Eliminamos la regla que ocultaba nth-child(3n+1) para mostrar más tarjetas */
 @media only screen and (max-width: 400px) {
     .animated-marquee {
         height: 340px;
@@ -308,7 +306,7 @@
 
     .animated-marquee-foreground .animated-marquee-card {
         height: 180px;
-        margin-right: 6%;
+        margin-right: 3%;
         width: 280px;
     }
 
@@ -324,26 +322,5 @@
         width: 2.5%;
     }
 
-    .animated-marquee-card:nth-child(2n+2) {
-        left: 1%;
-        top: 1%;
-    }
-
-    .animated-marquee-card:nth-child(5n+3) {
-        right: 1%;
-        top: 1%;
-    }
-
-    .animated-marquee-card:nth-child(2n+6) {
-        top: 1%;
-    }
-
-    .animated-marquee-card:nth-child(6n+3) {
-        bottom: 1%;
-        right: 1%;
-    }
-
-    .animated-marquee-card:nth-child(3n+2) {
-        visibility: hidden;
-    }
+    
 }

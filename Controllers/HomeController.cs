@@ -8,29 +8,51 @@ namespace Sistemas_de_inventario.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        // Constructor inyecta ILogger.
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
-        public IActionResult Login()
-        {
 
-            return View();
+        // Acción Index: página principal o dashboard tras el login.
+        public IActionResult Index()
+        {
+            return View(); // Vista: Views/Home/Index.cshtml
         }
+
+        // Acción para usuarios con rol "Supervisor"
         public IActionResult Supervisor()
         {
-            return View();
+            return View(); // Vista: Views/Home/Supervisor.cshtml
         }
 
+        // Acción para usuarios con rol "Warehouse"
+        public IActionResult Warehouse()
+        {
+            return View(); // Vista: Views/Home/Warehouse.cshtml
+        }
+
+        // Acción para usuarios con rol "Production"
+        public IActionResult Production()
+        {
+            return View(); // Vista: Views/Home/Production.cshtml
+        }
+
+        // Acción opcional Privacy
         public IActionResult Privacy()
         {
-            return View();
+            return View(); // Vista: Views/Home/Privacy.cshtml
         }
 
+        // Acción de Error
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Se asume que tienes la clase ErrorViewModel definida en tu proyecto
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }
