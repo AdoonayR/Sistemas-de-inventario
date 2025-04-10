@@ -12,26 +12,32 @@
         <h1>Gestión de Inventario - Almacén</h1>
 
         <div class="search-bar">
-            <input type="text" id="searchPart" placeholder="Buscar número de parte...">
+            <input type="text" id="searchPart" placeholder="Buscar número de parte">
             <button onclick="searchPart()">Buscar</button>
         </div>
 
         <div class="part-details">
             <label for="part-number">Número de Parte:</label>
-            <input type="text" id="part-number" disabled>
+            <input type="text" id="part-number" >
 
             <label for="part-name">Descripcion del Producto:</label>
-            <input type="text" id="part-name" disabled>
+            <input type="text" id="part-name" >
 
             <label for="quantity">Cantidad a Registrar:</label>
             <input type="number" id="quantity" min="1">
 
             <label for="location">Locación del Material:</label>
             <select id="location">
-                <option value="A1">A1 - Estante 1</option>
-                <option value="B1">B1 - Estante 2</option>
-                <option value="C1">C1 - Estante 3</option>
-                <option value="D1">D1 - Estante 4</option>
+                <option value="A1">A1 - Rack 1</option>
+                <option value="B1">B1 - Rack 2</option>
+                <option value="C1">C1 - Rack 3</option>
+                <option value="D1">D1 - Rack 4</option>
+                <option value="E1">E1 - Rack 5</option>
+                <option value="F1">F1 - Rack 6</option>
+                <option value="G1">G1 - Rack 7</option>
+                <option value="H1">H1 - Rack 8</option>
+                <option value="I1">I1 - Rack 9</option>
+                <option value="J1">J1 - Rack 10</option>
             </select>
 
             <label for="date">Fecha de Registro:</label>

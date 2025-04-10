@@ -13,7 +13,7 @@ function addPart() {
     const partNumber = document.getElementById('part-number').value;
     const partName = document.getElementById('part-name').value;
     const quantity = document.getElementById('quantity').value;
-    const date = document.getElementById('date').value;
+    const date = document.getElementById('date').value;     
     const location = document.getElementById('location').value;
 
     if (!partNumber || !partName || !quantity || !date || !location) {
