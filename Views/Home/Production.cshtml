@@ -1,32 +1,59 @@
-<html <!DOCTYPE html>
-    <html>
-    <head>
-        <title>View production</title>
-    </head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Producción</title>
+    <link rel="stylesheet" href="~/css/Production.css" />
+</head>
+<body>
 
-    <body>
-<div class="container">
-    <h1>Producción</h1>
+    <!-- Fondo animado -->
+    <div class="animated-marquee">
+        <div class="animated-marquee-container animated-marquee-foreground">
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+        </div>
 
-    <div class="form-container">
-        <h2>Registrar un numero de parte</h2>
+        <div class="animated-marquee-container animated-marquee-middleground">
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+        </div>
 
-        <form id="formproducto">
-
-            <label for="PN>Numero de parte: </label>
-            <input type="text" id="PN" name="PN" required />
-
-            <label for="cantidad">Cantidad: </label>
-            <input type="number" id="quantity" name="quantity" required />
-
-            <button type="submit">Agregar</button>
-
-        </form>
+        <div class="animated-marquee-container animated-marquee-background">
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+            <div class="animated-marquee-card"></div>
+        </div>
     </div>
 
 
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="form-box">
+            <h2>Requerir número de parte</h2>
+            <form id="formproducto">
+                <label for="PN">Número de parte:</label>
+                <input type="text" id="PN" name="PN" required />
 
-</div>
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" name="quantity" required />
 
-    </body>
-    </html>
+                <button type="submit">Requerir</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+

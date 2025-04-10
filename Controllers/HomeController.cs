@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Sistemas_de_inventario.Models;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Sistemas_de_inventario.Controllers
 {
@@ -17,7 +19,9 @@ namespace Sistemas_de_inventario.Controllers
         // Acción Index: página principal o dashboard tras el login.
         public IActionResult Index()
         {
-            return View(); // Vista: Views/Home/Index.cshtml
+            var userRole = User.IsInRole("Almacen"); // Verifica si el usuario es parte de "Almacen"
+            ViewData["ShowAlmacenOptions"] = userRole;
+            return View();
         }
 
         // Acción para usuarios con rol "Supervisor"
@@ -54,5 +58,18 @@ namespace Sistemas_de_inventario.Controllers
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             });
         }
+
+        // Acción para cerrar sesión
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            // Cierra la sesión del usuario autenticado
+            await HttpContext.SignOutAsync();
+
+            // Redirige a la página de Login
+            return RedirectToAction("Login", "Login");
+        }
     }
 }
+

@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Almacén</title>
+    <link rel="stylesheet" href="~/css/Warehouse.css">
+  
+</head>
+<body>
+
+    <!-- Barra superior -->
+    <header>
+        <div class="container">
+            <h1>Sistema de Consulta de Almacén</h1>
+        </div>
+    </header>
+
+        <!-- Contenido principal -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="search-container">
+                        <form id="search-form">
+                            <input type="text" id="part-number" name="part-number" class="form-control mb-2" placeholder="Ingresa el número de parte" required>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container mt-5">
+            <p>&copy; 2025 Sistema de Inventario - Almacén</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
