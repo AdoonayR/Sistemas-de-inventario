@@ -6,54 +6,92 @@
     <link rel="stylesheet" href="~/css/Production.css" />
 </head>
 <body>
+    <!-- Envoltura general del contenido -->
+    <div class="content-wrapper">
 
-    <!-- Fondo animado -->
-    <div class="animated-marquee">
-        <div class="animated-marquee-container animated-marquee-foreground">
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-        </div>
+        <!-- Sección de Búsqueda -->
+        <section id="buscarSection">
+            <h2>Buscar Material</h2>
+            <div class="search-container">
+                <form id="search-form" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" id="part-number" name="part-number"
+                               class="form-control" placeholder="Ingresa el número de parte" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
-        <div class="animated-marquee-container animated-marquee-middleground">
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-        </div>
+                <!-- Resultados de Búsqueda -->
+                <div id="resultados-busqueda" style="display: none;">
+                    <div class="card material-card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">Detalles del Material</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Número de Parte:</strong> <span id="resultado-part-number"></span></p>
+                            <p><strong>Descripción:</strong> <span id="resultado-descripcion"></span></p>
+                            <p><strong>Cantidad Disponible:</strong> <span id="resultado-cantidad"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="animated-marquee-container animated-marquee-background">
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
-            <div class="animated-marquee-card"></div>
+        <!-- Botón para mostrar el formulario -->
+        <button class="show-button" onclick="mostrarFormulario()">Requerir material</button>
+
+        <div id="formulario" class="form-box">
+            <!-- Formulario para crear solicitud de material -->
+            <section id="solicitarMaterialSection">
+                <h2>Solicitud de Material</h2>
+
+                <form id="form-solicitar-material">
+                    <!-- Número de Parte -->
+                    <div class="form-group">
+                        <label for="numero-parte">Número de Parte:</label>
+                        <input type="text" id="numero-parte" name="numero-parte" class="form-control" placeholder="Ingresa el número de parte" required>
+                    </div>
+
+                    <!-- Cantidad -->
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad solicitada" min="1" required>
+                    </div>
+
+                    <!-- Tipo de Solicitud -->
+                    <div class="form-group">
+                        <label for="tipo-solicitud">Tipo de Solicitud:</label>
+                        <select id="tipo-solicitud" name="tipo-solicitud" class="form-control" required>
+                            <option value="estandar">Estandar</option>
+                            <option value="urgente">Urgente</option>
+                            <option value="reemplazo">Reemplazo</option>
+                        </select>
+                    </div>
+
+                    <!-- Comentarios -->
+                    <div class="form-group">
+                        <label for="comentarios">Comentarios:</label>
+                        <textarea id="comentarios" name="comentarios" class="form-control" rows="4" placeholder="Agregar comentarios adicionales (opcional)"></textarea>
+                    </div>
+
+                    <!-- Botones de Enviar y Cancelar -->
+                    <div class="form-group button-group">
+                        <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
 
-
-    <!-- Contenido principal -->
-    <div class="container">
-        <div class="form-box">
-            <h2>Requerir número de parte</h2>
-            <form id="formproducto">
-                <label for="PN">Número de parte:</label>
-                <input type="text" id="PN" name="PN" required />
-
-                <label for="quantity">Cantidad:</label>
-                <input type="number" id="quantity" name="quantity" required />
-
-                <button type="submit">Requerir</button>
-            </form>
-        </div>
-    </div>
-
+    <script src="/js/Production.js"></script>
 </body>
 </html>
+
+
+
 
