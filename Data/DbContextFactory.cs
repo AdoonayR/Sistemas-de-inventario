@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Sistemas_de_inventario.Data;
-using Sistemas_de_inventario.Models; // Asegúrate de usar tu namespace real
+using Sistemas_de_inventario.Models; 
 
 public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
 {

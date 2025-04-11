@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Sistemas_de_inventario.Data;
 
 namespace Sistemas_de_inventario.Models
 {
@@ -16,7 +17,6 @@ namespace Sistemas_de_inventario.Models
         [Required(ErrorMessage = "El rol es obligatorio.")]
         public string Role { get; set; } = string.Empty;
 
-        // Nuevas propiedades:
         [Required(ErrorMessage = "El correo es obligatorio.")]
         [EmailAddress(ErrorMessage = "El correo electrónico no es válido.")]
         public string Email { get; set; } = string.Empty;
