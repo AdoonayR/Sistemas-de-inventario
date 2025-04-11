@@ -3,61 +3,98 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Sistemas_de_inventario</title>
+    <title>@ViewData["Title"] - Ayuda y Privacy</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Sistemas_de_inventario.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/BackGround.css" />
+    <link rel="stylesheet" href="/css/Warehouse.css" />
+
+    <style>
+        /* Barra semi-transparente */
+        .navbar-custom {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            border-bottom: 1px solid #ccc;
+        }
+        /* Ajustes para link con apariencia de brand */
+        .nav-big-link {
+            font-weight: bold;
+            color: #333 !important;
+            font-size: 1.125rem; /* ajusta según lo necesites */
+            margin-right: 1rem;
+        }
+
+            .nav-big-link:hover {
+                color: #000 !important;
+            }
+        /* Imagen de perfil */
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <!-- Encabezado con barra semi-transparente -->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light navbar-custom">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sistemas_de_inventario</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Botón hamburguesa (para pantallas pequeñas) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <form asp-controller="Home" asp-action="Logout" method="post" class="d-inline">
-                                <button type="submit" class="nav-link text-dark" style="border: none; background: none; padding: 0;">Cerrar sesión</button>
-                            </form>
-</li>
 
+                <!-- Contenedor del menú de la derecha -->
+                <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+                    <ul class="navbar-nav align-items-center">
+                        <!-- Link: Ayuda -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link nav-big-link" asp-area="" asp-controller="Home" asp-action="Index">Ayuda</a>
                         </li>
-
-                        <!-- Opciones exclusivas para el rol Almacen -->
-                        @if (ViewData["ShowAlmacenOptions"] != null && (bool)ViewData["ShowAlmacenOptions"])
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Almacen" asp-action="Agregar">Agregar Número de Parte</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Almacen" asp-action="Eliminar">Eliminar Número de Parte</a>
-                            </li>
-                        }
+                        <!-- Link: Privacy -->
+                        <li class="nav-item">
+                            <a class="nav-link nav-big-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <!-- Dropdown de perfil -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/Imagenes/profile-picture.png" alt="Perfil" class="profile-img" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <li>
+                                    <form asp-area="" asp-controller="Home" asp-action="Logout" method="post" class="px-3">
+                                        <button type="logout" class="dropdown-item">Cerrar sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+    <!-- Contenido principal -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    <!-- Footer -->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Sistemas_de_inventario - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Ayuda y Privacy
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
