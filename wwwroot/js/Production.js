@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("formulario");
     const showButton = document.querySelector(".show-button");
-    const cancelButton = document.querySelector(".btn-secondary"); // <-- Botón cancelar
+    const cancelButton = document.querySelector(".btn-secondary"); 
 
     if (form && showButton) {
         // Asegurarse de que el formulario está oculto inicialmente
