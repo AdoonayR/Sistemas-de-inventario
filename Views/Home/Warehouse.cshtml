@@ -5,12 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Almacén</title>
-
-    <!-- Estilos de fondo (BackGround.css) y de la página Warehouse -->
     <link rel="stylesheet" href="/css/BackGround.css" />
     <link rel="stylesheet" href="/css/Warehouse.css" />
-
-    <!-- Bootstrap (opcional) -->
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
@@ -34,17 +30,20 @@
         <!-- Contenido principal (columna derecha) -->
         <main class="main-content">
             <header>
-                <h1>Sistema de Consulta de Almacén</h1>
             </header>
 
             <!-- Sección de Búsqueda -->
             <section id="buscarSection" class="content-section">
                 <h2>Buscar Material</h2>
                 <div class="search-container">
+                    <!-- Form SIN action, para que NO haga submit tradicional -->
                     <form id="search-form" class="mb-4">
                         <div class="input-group">
-                            <input type="text" id="part-number" name="part-number"
-                                   class="form-control" placeholder="Ingresa el número de parte" required>
+                            <input type="text"
+                                   id="part-number"
+                                   name="part-number"
+                                   class="form-control"
+                                   placeholder="Ingresa el número de parte" />
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-search"></i> Buscar
@@ -65,19 +64,15 @@
                                     <div class="col-md-6">
                                         <div class="info-group">
                                             <span class="info-label">Número de Parte:</span>
-                                            <span id="num-parte" class="info-value">MP-10025</span>
+                                            <span id="num-parte" class="info-value"></span>
                                         </div>
                                         <div class="info-group">
                                             <span class="info-label">Descripción:</span>
-                                            <span id="descripcion" class="info-value">Tornillo hexagonal cabeza avellanada acero inox 1/4"</span>
+                                            <span id="descripcion" class="info-value"></span>
                                         </div>
                                         <div class="info-group">
                                             <span class="info-label">Categoría:</span>
-                                            <span id="categoria" class="info-value">Tornillería</span>
-                                        </div>
-                                        <div class="info-group">
-                                            <span class="info-label">Unidad de Medida:</span>
-                                            <span id="unidad-medida" class="info-value">Piezas</span>
+                                            <span id="categoria" class="info-value"></span>
                                         </div>
                                     </div>
 
@@ -85,91 +80,17 @@
                                     <div class="col-md-6">
                                         <div class="info-group">
                                             <span class="info-label">Cantidad Disponible:</span>
-                                            <span id="cantidad" class="info-value">1,250 <small class="text-muted">(en stock)</small></span>
+                                            <span id="cantidad" class="info-value"></span>
                                         </div>
                                         <div class="info-group">
-                                            <span class="info-label">Ubicación Principal:</span>
-                                            <span id="ubicacion" class="info-value">Estante A-15 / BIN 24</span>
+                                            <span class="info-label">Locacion:</span>
+                                            <span id="ubicacion" class="info-value"></span>
                                         </div>
                                         <div class="info-group">
                                             <span class="info-label">Proveedor Principal:</span>
-                                            <span id="proveedor" class="info-value">Tornillos Industriales S.A.</span>
+                                            <span id="proveedor" class="info-value"></span>
                                         </div>
-                                        <div class="info-group">
-                                            <span class="info-label">Código de Barras:</span>
-                                            <span id="codigo-barras" class="info-value">1234567890123</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Sección de Movimientos/Existencias -->
-                                <div class="mt-4">
-                                    <h6 class="section-divider">
-                                        <span>Existencias por Almacén</span>
-                                    </h6>
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Almacén</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Ubicación</th>
-                                                    <th>Último Movimiento</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Almacén Principal</td>
-                                                    <td>850</td>
-                                                    <td>A-15/BIN24</td>
-                                                    <td>10/Abr/2025</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Almacén Secundario</td>
-                                                    <td>400</td>
-                                                    <td>B-02/BIN10</td>
-                                                    <td>05/Abr/2025</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <!-- Sección de Historial -->
-                                <div class="mt-3">
-                                    <button class="btn btn-outline-secondary btn-sm" data-toggle="collapse" data-target="#historialMovimientos">
-                                        <i class="fas fa-history"></i> Ver Historial de Movimientos
-                                    </button>
-                                    <div id="historialMovimientos" class="collapse mt-2">
-                                        <div class="table-responsive">
-                                            <table class="table table-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Fecha</th>
-                                                        <th>Tipo</th>
-                                                        <th>Cantidad</th>
-                                                        <th>Origen/Destino</th>
-                                                        <th>Usuario</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>10/Abr/2025 14:30</td>
-                                                        <td>Entrada</td>
-                                                        <td>+500</td>
-                                                        <td>Orden Compra #4502</td>
-                                                        <td>jperez</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>05/Abr/2025 09:15</td>
-                                                        <td>Salida</td>
-                                                        <td>-150</td>
-                                                        <td>Producción Línea B</td>
-                                                        <td>mgonzalez</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

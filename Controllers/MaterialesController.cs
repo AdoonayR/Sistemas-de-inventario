@@ -76,5 +76,51 @@ namespace Sistemas_de_inventario.Controllers
                 message = "¡Material guardado exitosamente!"
             });
         }
+
+
+        [HttpGet]
+        public IActionResult Buscar(string partNumber)
+        {
+            if (string.IsNullOrWhiteSpace(partNumber))
+            {
+                // No se ingresó nada
+                return Json(new
+                {
+                    success = false,
+                    message = "No se ingresó un número de parte."
+                });
+            }
+
+            // Buscamos el material en la BD
+            var material = _context.Materiales
+                .FirstOrDefault(m => m.NumeroParte == partNumber);
+
+            if (material == null)
+            {
+                // No encontrado
+                return Json(new
+                {
+                    success = false
+                });
+            }
+
+            // Si se encuentra, devolvemos la info relevante
+            return Json(new
+            {
+                success = true,
+                data = new
+                {
+                    numeroParte = material.NumeroParte,
+                    descripcion = material.Descripcion,
+                    categoria = material.Categoria.ToString(),
+                    unidadMedida = material.UnidadMedida.ToString(),
+                    cantidad = material.Cantidad,
+                    ubicacion = material.Ubicacion,
+                    proveedor = material.Proveedor,
+                    codigoBarras = "1234567890123" // por ejemplo, si lo tienes
+                }
+            });
+        }
+
     }
 }

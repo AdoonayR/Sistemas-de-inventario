@@ -51,3 +51,49 @@ $(document).ready(function () {
         });
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.getElementById('search-form');
+    const resultadosDiv = document.getElementById('resultados-busqueda');
+    const sinResultadosDiv = document.getElementById('sin-resultados');
+
+    if (searchForm) {
+        searchForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Evitamos el submit normal
+
+            // Tomamos el part-number
+            const partNumber = document.getElementById('part-number').value.trim();
+
+            if (!partNumber) {
+                alert("Ingrese un número de parte.");
+                return;
+            }
+
+            // Llamada AJAX (GET) a /Materiales/Buscar?partNumber=xxx
+            fetch(`/Materiales/Buscar?partNumber=${encodeURIComponent(partNumber)}`)
+                .then(response => response.json())
+                .then(json => {
+                    if (!json.success) {
+                        // No encontrado
+                        resultadosDiv.style.display = 'none';
+                        sinResultadosDiv.style.display = 'block';
+                    } else {
+                        // Llenamos los campos en #resultados-busqueda
+                        document.getElementById('num-parte').textContent = json.data.numeroParte;
+                        document.getElementById('descripcion').textContent = json.data.descripcion;
+                        document.getElementById('categoria').textContent = json.data.categoria;
+                        document.getElementById('cantidad').textContent = json.data.cantidad + " " + json.data.unidadMedida;
+                        document.getElementById('ubicacion').textContent = json.data.ubicacion;
+                        document.getElementById('proveedor').textContent = json.data.proveedor;
+                        
+
+                        sinResultadosDiv.style.display = 'none';
+                        resultadosDiv.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error("Error en la búsqueda:", error);
+                    alert("Ocurrió un error inesperado en la búsqueda.");
+                });
+        });
+    }
+});
