@@ -29,6 +29,8 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
     }
 });
 
+builder.Logging.AddConsole().SetMinimumLevel(LogLevel.Debug);
+
 // Configuración de controladores y vistas
 builder.Services.AddControllersWithViews(options =>
 {
@@ -142,5 +144,6 @@ app.Use(async (context, next) =>
         await next();
     }
 });
+
 
 app.Run();

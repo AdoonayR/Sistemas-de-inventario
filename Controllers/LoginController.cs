@@ -21,21 +21,21 @@ namespace Sistemas_de_inventario.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View(); // Busca la vista en: Views/Login/Login.cshtml
+            return View(); // Muestra la vista en Views/Login/Login.cshtml
         }
 
         // POST: /Login/Login
         [HttpPost]
+        [ValidateAntiForgeryToken] // <-- Recomendable si tu form incluye @Html.AntiForgeryToken()
         public async Task<IActionResult> Login(string Email, string Password)
         {
-            // Validar que se hayan enviado datos
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
             {
                 ModelState.AddModelError("", "Debe ingresar correo y contraseña.");
                 return View();
             }
 
-            // Buscar el usuario en la base de datos
+            // Busca en la BD
             var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(u => u.Email == Email && u.Password == Password);
 
@@ -45,7 +45,7 @@ namespace Sistemas_de_inventario.Controllers
                 return View();
             }
 
-            // Crear lista de Claims
+            // Construye la lista de Claims
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, usuario.Email),
@@ -53,12 +53,14 @@ namespace Sistemas_de_inventario.Controllers
                 new Claim(ClaimTypes.Role, usuario.Role ?? "User")
             };
 
-            // Crear la identidad y el principal con el esquema de cookies
+            // Crea la identidad y principal
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 
-            // Firmar (crear) la cookie de autenticación
+            // Firmar la cookie
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+            // Redirige según el rol
             switch (usuario.Role?.ToLower())
             {
                 case "supervisor":

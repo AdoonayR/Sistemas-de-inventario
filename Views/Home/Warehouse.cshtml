@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model Sistemas_de_inventario.Models.ViewModels.MaterialCreateViewModel
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -182,108 +183,135 @@
                 </div>
             </section>
 
-            <!-- Sección para Agregar Material -->
-            <section id="agregarSection" class="content-section" style="display: none;">
+
+
+            <section id="agregarSection" class="content-section">
                 <h2 class="mb-4">Agregar Nuevo Material</h2>
-                <form id="agregarForm">
-                    <!-- Primera Fila - 2 columnas -->
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <li>@error.ErrorMessage</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <!-- NOTA: "method=post" y "asp-action" pueden quedar, pero no se usará el submit normal.
+                     El AJAX sobrescribirá el evento "submit".
+                     También agregamos un "id" y "action" para que jQuery lo use. -->
+                <form id="agregarForm"
+                      asp-controller="Materiales"
+                      asp-action="Warehouse"
+                      method="post">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Primera Fila -->
                     <div class="row">
-                        <!-- Columna Izquierda -->
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="num-parte" class="form-label">Número de Parte *</label>
-                                <input type="text" id="num-parte" name="num-parte" class="form-control form-control-sm" required>
+                                <label asp-for="NumeroParte"></label>
+                                <input asp-for="NumeroParte" class="form-control"
+                                       pattern="[A-Z0-9-]+"
+                                       title="Solo mayúsculas, números y guiones">
+                                <span asp-validation-for="NumeroParte" class="text-danger"></span>
                             </div>
                         </div>
-
-                        <!-- Columna Derecha -->
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="lote" class="form-label">Número de Lote/Serie</label>
-                                <input type="text" id="lote" name="lote" class="form-control form-control-sm">
+                                <label asp-for="Lote"></label>
+                                <input asp-for="Lote" class="form-control">
+                                <span asp-validation-for="Lote" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Segunda Fila - Descripción (ancho completo) -->
+                    <!-- Descripción -->
                     <div class="form-group mb-3">
-                        <label for="descripcion" class="form-label">Descripción *</label>
-                        <textarea id="descripcion" name="descripcion" class="form-control form-control-sm" rows="2" required></textarea>
+                        <label asp-for="Descripcion"></label>
+                        <textarea asp-for="Descripcion" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
                     </div>
 
-                    <!-- Tercera Fila - 3 columnas -->
+                    <!-- Ubicación, Proveedor, Cantidad -->
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="ubicacion" class="form-label">Ubicación *</label>
-                                <select id="ubicacion" name="ubicacion" class="form-control form-control-sm" required>
-                                    <option value="">Seleccionar ubicación...</option>
+                                <label asp-for="Ubicacion"></label>
+                                <select asp-for="Ubicacion" class="form-control" required>
+                                    <option value="">Seleccionar...</option>
                                     <option value="ZONA1-EST1-BIN1">ZONA1-EST1-BIN1</option>
                                     <option value="ZONA1-EST1-BIN2">ZONA1-EST1-BIN2</option>
-                                    <option value="ZONA1-EST2-BIN1">ZONA1-EST2-BIN1</option>
-                                    <option value="ZONA1-EST2-BIN2">ZONA1-EST2-BIN2</option>
-                                    <option value="ZONA2-EST1-BIN1">ZONA2-EST1-BIN1</option>
+                                    <!-- Más opciones -->
                                 </select>
-                                <small class="form-text text-muted">Formato: ZONA-ESTANTE-BIN</small>
+                                <span asp-validation-for="Ubicacion" class="text-danger"></span>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="proveedor" class="form-label">Proveedor</label>
-                                <select id="proveedor" name="proveedor" class="form-control form-control-sm">
-                                    <option value="">Seleccione...</option>
-                                    <option value="1">Proveedor A</option>
-                                    <option value="2">Proveedor B</option>
-                                    <option value="3">Proveedor C</option>
+                                <label asp-for="Proveedor"></label>
+                                <select asp-for="Proveedor" class="form-control">
+                                    <option value="">Sin proveedor</option>
+                                    <option value="Proveedor A">Proveedor A</option>
+                                    <option value="Proveedor B">Proveedor B</option>
                                 </select>
+                                <span asp-validation-for="Proveedor" class="text-danger"></span>
                             </div>
                         </div>
-
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="cantidad" class="form-label">Cantidad *</label>
-                                <input type="number" id="cantidad" name="cantidad" class="form-control form-control-sm" min="1" value="1" required>
+                                <label asp-for="Cantidad"></label>
+                                <input asp-for="Cantidad" class="form-control" min="1" value="1">
+                                <span asp-validation-for="Cantidad" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Cuarta Fila - 2 columnas -->
+                    <!-- Categoría y Unidad de Medida -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="categoria" class="form-label">Categoría *</label>
-                                <select id="categoria" name="categoria" class="form-control form-control-sm" required>
-                                    <option value="">Seleccione...</option>
-                                    <option value="tornilleria">Tornillería</option>
-                                    <option value="herramientas">Herramientas</option>
-                                    <option value="materiales">Materiales</option>
+                                <label asp-for="Categoria"></label>
+                                <select asp-for="Categoria" class="form-control"
+                                        asp-items="Html.GetEnumSelectList<CategoriasMaterial>()">
+                                    <option value="">Seleccione categoría...</option>
                                 </select>
+                                <span asp-validation-for="Categoria" class="text-danger"></span>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="unidad-medida" class="form-label">Unidad *</label>
-                                <select id="unidad-medida" name="unidad-medida" class="form-control form-control-sm" required>
-                                    <option value="">Seleccione...</option>
-                                    <option value="pieza">Pieza</option>
-                                    <option value="metro">Metro</option>
-                                    <option value="litro">Litro</option>
-                                    <option value="kg">Kilogramo</option>
+                                <label asp-for="UnidadMedida"></label>
+                                <select asp-for="UnidadMedida" class="form-control"
+                                        asp-items="Html.GetEnumSelectList<UnidadesMedida>()">
+                                    <option value="">Seleccione unidad...</option>
                                 </select>
+                                <span asp-validation-for="UnidadMedida" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Botón de Guardar -->
-                    <div class="form-group text-center mt-3">
-                        <button type="submit" class="btn btn-primary btn-sm">
+                    <!-- Botón de envío -->
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Guardar Material
                         </button>
                     </div>
                 </form>
             </section>
+
+
 
             <!-- Sección para Mover Material -->
             <section id="moverSection" class="content-section" style="display: none;">
@@ -448,17 +476,13 @@
         </div>
     </footer>
 
-    <!-- GSAP (para TweenLite), si tu BackGround.js lo requiere -->
+    <!-- GSAP (para TweenLite) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenLite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/easing/EasePack.min.js"></script>
-
-    <!-- jQuery, Bootstrap.bundle, si lo usas -->
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Tu script de animación (BackGround.js) -->
     <script src="/js/BackGround.js"></script>
-    <!-- Tu script personalizado para las secciones (Warehouse.js) -->
     <script src="/js/Warehouse.js"></script>
+    <script src="/js/materialesAjax.js"></script>
 </body>
 </html>
